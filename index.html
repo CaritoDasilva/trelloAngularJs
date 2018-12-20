@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="trelloApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="./assets/trelloPestana.png" />
+
+    <title>trello</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body ng-controller="trelloController">
+    <div class="container-fluid">
+      <div class="row" id="headerLogos">
+        <div class=".col 4">
+          <div class="row ">
+            <div class="col-3">
+              <div class=" input-group mb-3 " id="tablerosDiv">
+                <div class="input-group-prepend " id="tablerosBtn">
+                  <button
+                    class="btn btn-secondary dropdown"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="fab fa-trello "></i>
+                    <span id="wordTab">Tableros</span>
+                  </button>
+                  <div class="dropdown-menu ">
+                    <a class="dropdown-item " href="# ">Action</a>
+                    <a class="dropdown-item " href="# ">Another action</a>
+                    <a class="dropdown-item " href="# ">Something else here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-8 ">
+              <div class="input-group " id="searchBox ">
+                <input
+                  type="text "
+                  class="form-control "
+                  aria-label="Dollar amount (with dot and two decimal places) "
+                  id="inputSearch"
+                />
+                <div class="input-group-append ">
+                  <span class="input-group-text ">
+                    <i class="fas fa-search "></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4" id="colLogo"><div id="logoTrello"></div></div>
+
+        <div class="col-4 iconsContent">
+          <div class=" d-flex flex-row bd-highlight mb-3-icons  ">
+            <div class="col-8 p bd-highlight icons" id="relleno"></div>
+
+            <div class="p bd-highlight icons-icon ">
+              <a class="btn btn-primary " href="# " role="button ">
+                <i class="fas fa-plus "></i>
+              </a>
+            </div>
+            <div class="p bd-highlight icons-icon ">
+              <a class="btn btn-primary " href="# " role="button " id="infoBtn">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </div>
+            <div class="p bd-highlight icons-icon ">
+              <a class="btn btn-primary " href="# " role="button ">
+                <i class="far fa-bell"></i>
+              </a>
+            </div>
+            <div class="p bd-highlight icons-icon ">
+              <a
+                class="btn btn-primary "
+                href="# "
+                role="button"
+                id="userProfile"
+              >
+                <i class="fas fa-user-circle"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="secondIconsLine">
+        <div class="col-4">
+          <div class=" d-flex flex-row bd-highlight mb-3 ">
+            <div class="p bd-highlight">
+              <a class="btn btn-primary iconsInfo" href="# " role="button ">
+                <span class="words">TABLERO</span>
+              </a>
+            </div>
+            <div class="p bd-highlight">
+              <a class="btn btn-primary iconsInfo" href="# " role="button ">
+                <i class="far fa-star"></i>
+              </a>
+            </div>
+            <div class="p bd-highlight">
+              <a class="btn btn-primary iconsInfo" href="# " role="button ">
+                <span class="words">PERSONAL</span>
+              </a>
+            </div>
+            <div class="p bd-highlight">
+              <a class="btn btn-primary iconsInfo" href="# " role="button ">
+                <i class="fas fa-lock"></i> <span class="words">PRIVADO</span>
+              </a>
+            </div>
+
+            <div class="p bd-highlight">
+              <a
+                class="btn btn-primary iconsInfo"
+                href="# "
+                role="button "
+                id="finalCircle"
+              >
+                <i class="fas fa-user-circle"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="thirdIconsLine">
+        <div class="col-3">
+          <div class="p bd-highlight">
+            <a
+              class="btn btn-primary iconsInfo"
+              href="# "
+              role="button "
+              id="userCircle"
+            >
+              <i class="fas fa-user-circle"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="homeworkRow">
+        <div class="col" id="homeworkDiv2"></div>
+        <div class="col-3" id="homeworkDiv"></div>
+      </div>
+
+      <!-- {{ "Hola " + nombre }} -->
+
+      <div class="listOfCards">
+        <form ng-submit="agregarTitulo()" class="cardList">
+          <div class="card " style="width: 18rem;">
+            <div class="card-body">
+              <input
+                class="form-control form-control-lg plusWork"
+                type="text"
+                placeholder="Introduzca el título de la lista..."
+                name="plusWorkBefore"
+                ng-model="nuevoTitulo"
+              />
+              <input
+                href="#"
+                class="btn btn-primary listBtn"
+                type="submit"
+                value="Guardar título"
+              />
+            </div>
+          </div>
+        </form>
+        <div
+          ng-repeat="title in toDo"
+          ng-show="title.titulo.length > 0"
+          class="card"
+          style="width: 18rem;"
+        >
+          <div class="card-body">
+            <h5 class="card-title">{{ title.titulo }}</h5>
+            <input
+              type="text"
+              class="form-control"
+              name="cardPlus"
+              placeholder="Introduzca un título para esta tarjeta"
+            /><a
+              href="#"
+              class="btn btn-primary listBtn"
+              onclick="agregarTarjetaClick(event)"
+            >
+              Añadir Tarjeta</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
